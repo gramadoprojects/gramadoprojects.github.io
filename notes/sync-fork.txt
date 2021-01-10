@@ -1,0 +1,17 @@
+
+
+    Commands to sync the fork with the upstream:
+    
+    
+    $ git remote -v
+    $ git remote add upstream https://github.com/frednora/gramado 
+    $ git fetch upstream
+    $ git checkout master
+    $ git merge upstream/master
+
+
+    See:
+    https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork
+    https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork
+    
+    
