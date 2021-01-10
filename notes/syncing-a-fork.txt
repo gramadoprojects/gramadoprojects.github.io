@@ -1,0 +1,26 @@
+Syncing a fork
+
+Sync a fork of a repository to keep it up-to-date with the upstream repository.
+
+See:
+https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/syncing-a-fork
+https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork
+
+-----------------
+Steps:
+
++ Specify a new remote [NEW] repository that will be synced with the fork.
+
++ Fetch the branches and their respective commits from the [NEW] repository. 
+  git fetch [NEW]
+  example: git fetch upstream
+
++ Check out your fork's local default branch.
+  git checkout master
+
+
++ Merge the changes from the [NEW] default branch.
+  git merge [NEW]/main
+  example:   git merge upstream/main
+
+
