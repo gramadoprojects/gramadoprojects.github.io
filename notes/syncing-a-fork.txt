@@ -10,6 +10,8 @@ https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues
 Steps:
 
 + Specify a new remote [NEW] repository that will be synced with the fork.
+  git remote -v
+  git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY
 
 + Fetch the branches and their respective commits from the [NEW] repository. 
   git fetch [NEW]
