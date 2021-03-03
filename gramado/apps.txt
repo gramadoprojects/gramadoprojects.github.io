@@ -1,0 +1,10 @@
+Sobre os aplicativos:
+-------------------------
+gramado/cmd/
+Aplicativos bem simples usam apenas a libc e rodam no console do kernel em full screen.
+--------------------------
+gramado/setup/
+Os aplicativos aqui são em modo janela e usam os recursos gráficos do kernel. Esses recursos gráficos são bem limitados. Com eles teremos uma interface gráfica simples, ainda antes de instalarmos o window server.
+--------------------------
+gramado/shell/apps/
+Os aplicativos aqui usam os recursos gráficos oferecidos pelo window server carregável. Então para usar esses aplicativos primeiro tem que inicializar o window server. 
