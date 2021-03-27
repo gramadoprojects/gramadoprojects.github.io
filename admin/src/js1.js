@@ -1,89 +1,110 @@
 
     /* Travado até que acerte o username e o password*/ 
-    var adminLocked = 1;
-	var indexInitialized = 0;
-	var adminInitialized = 0;
-	/*...*/
-	
+    var adminLocked      = true;
+    var indexInitialized = false;
+    var adminInitialized = false;
+    /*...*/
 
-    
-	/* 
-	 Essa função é chamda no body do index.html para inicializar a página index.html.
-	 Deve travar a página de admin, que só destrava com username e password corretos */
-	function indexInitialize()
-	{
-        adminLocked = 1;	   /* travando admin. */	
-		indexInitialized = 1;  /* index.html está pronta para uso.*/		
-	};
-	
-	
-	function adminInitialize()
-	{
-		/* foco */
-		document.getElementById("adminPostNumberEditBox").focus();
-		
-		/* alert("adminInitialize: starting ..."); */ 	
-		
-		/*Se estiver travado quando admin.html inicializa através do elemento 'body'.*/
-        if(adminLocked == 1)
-		{
-			/*avisamos que está travado.*/
-		    /* alert("adminInitialize: Locked! :("); */ 
+
+    /* 
+     Essa função é chamada no body do index para inicializar a página index.html.
+     Deve travar a página de admin, que só destrava com username e password corretos 
+     */
+
+    function indexInitialize()
+    {
+        adminLocked      = true;  /* travando admin. */
+        indexInitialized = true;  /* index.html está pronta para uso.*/
+    }
+
+    /* Initialzie. */
+    function adminInitialize()
+    {
+        /* Focus */
+
+        document.getElementById("adminPostNumberEditBox").focus();
+
+
+        /* alert("adminInitialize: starting ..."); */ 	
+
+        /* Se estiver travado quando admin.html inicializa 
+           através do elemento 'body'. */
+
+        if ( adminLocked == true )
+        {
+
+            /*avisamos que está travado.*/
+            /* alert("adminInitialize: Locked! :("); */ 
             
-			/* Checar se os dados enviados estão corretos */
-		    if( initialize() === 0 )
-			{
-				alert("adminInitialize: Success :) "); 
-	            adminLocked = 0;
-	            adminInitialized = 1;
-				return 0;
-			}
-		};
-	
-	    /* fail */
-		alert("adminInitialize: FAIL :("); 
-	    adminLocked = 1;
-	    adminInitialized = 0;
-	    return 1;
-	};
-	
+            /* Checar se os dados enviados estão corretos */
+            
+            if ( initialize() === false )
+            {
+                alert("adminInitialize: Success :) "); 
+
+                adminLocked      = false;
+                adminInitialized = true;
+
+                return 0;
+            }
+        }
+
+        /* fail */
+        alert("adminInitialize: FAIL :("); 
+
+        adminLocked      = true;
+        adminInitialized = false;
+
+        return 1;
+    }
+
+
 	//Initialize ...
 
     function initialize()
-	{
-		/* Travando novamente para garantir. Destravaremos se os inputs forem as palavras que queremos*/
-		adminLocked = 1;
-        adminInitialized = 0;
-		
-		/* get username*/
-		/* get password*/
-		/* A única opção válida é admin admin*/
-		var GET = window.location.search.substring(16);
-		
-		/* Comparando as duas entradas de uma vez só.
+    {
+        /* Travando novamente para garantir. 
+           Destravaremos se os inputs forem 
+           as palavras que queremos */
+
+        adminLocked      = true;
+        adminInitialized = false;
+
+		/* get username */
+		/* get password */
+		/* A única opção válida é admin admin */
+
+        var GET = window.location.search.substring(16);
+
+		/* 
+		 * Comparando as duas entradas de uma vez só.
 		 * Destravaremos admin.html, se forem as palavras certas.
 		 */
-		
-		/* admin admin */
-        if( GET == "admin&password_input=admin")
-		{
+
+        /* admin admin */
+        if ( GET == "admin&password_input=admin"){
+
             /* success */    
-			alert("initialize: destravando ..."); 			
+            alert("initialize: destravando ...");
 			/* window.alert(GET); */
-			adminLocked = 0;    /*destravando*/
-			adminInitialized = 1;
-			return 0;
-			
+
+            adminLocked      = false;  /*destravando*/
+            adminInitialized = true;
+
+            return 0;
+
         }else{
-			
+
 	        /* fail */
 		    alert("initialize:  FAIL try admin admin :("); 
-	        adminLocked = 1;
-	        adminInitialized = 0;
-	        return 1;
-		}		
+
+            adminLocked      = true;
+            adminInitialized = false;
+
+            return 1;
+        }
     }
-	
+
 
     function showLinks() {
 
@@ -123,17 +144,17 @@
 		xLinkText3 = "Links";
 		xLinkText4 = "Contact me";
 		
-		urlDB1 = "https://frednora.github.io";
-		urlDB2 = "https://frednora.github.io/about";
-		urlDB3 = "https://frednora.github.io/links";
-		urlDB4 = "https://frednora.github.io/contact";
-        
+		urlDB1 = "https://noranotes.github.io";
+		urlDB2 = "https://noranotes.github.io/about";
+		urlDB3 = "https://noranotes.github.io/links";
+		urlDB4 = "https://noranotes.github.io/contact";
+
 		/* Listando minhas redes socias mais importantes */
 
 		/* Facebook #ux1 */
         strDB = "facebook friends hangout personal post friendship images likes contact londrina paraná brasil photos life"; 
         var resFacebook = strDB.match(document.myForm.username_input.value);
-		
+
 		/* Youtube #ux1 */
         strDB = "youtube video videos movie watch playlist channel funny entertainment happy english diy tech"; 
         var resYoutube = strDB.match(document.myForm.username_input.value);
@@ -158,23 +179,23 @@
 		/* More ... */
 		
         /*Facebook #ux1*/
-        if(resFacebook == document.myForm.username_input.value)
-		{ 
+        if (resFacebook == document.myForm.username_input.value)
+        { 
             xLinkText1 = "Facebook profile";
-			urlDB1 = "https://facebook.com/frednoramusic";
-			
-			xLinkText2 = "Facebook page";
-			urlDB2 = "https://facebook.com/frednora";
-			
+            urlDB1 = "https://facebook.com/frednora";
+
+            xLinkText2 = "Facebook page";
+            urlDB2 = "https://facebook.com/frednora";
+
 			xLinkText3 = "Facebook photos";
 			urlDB3 = "https://facebook.com/frednora/photos";
-			
+
 			xLinkText4 = "Facebook about";
 			urlDB4 = "https://facebook.com/frednora/about";
-        }; 
-		
+        }
+
         /*Youtube*/
-        if(resYoutube == document.myForm.username_input.value)
+        if (resYoutube == document.myForm.username_input.value)
 		{ 
             xLinkText1 = "Youtube User";
 			urlDB1 = "https://youtube.com/user/frednoramusic";
@@ -187,13 +208,13 @@
 			
 			xLinkText4 = "Youtube Gaming";
 			urlDB4 = "https://gaming.youtube.com/frednora";
-        };  
-		
+        }
+
         /*Twitter*/
-        if(resTwitter == document.myForm.username_input.value)
-		{ 
+        if (resTwitter == document.myForm.username_input.value)
+        { 
             xLinkText1 = "@frednora | Twitter profile";
-			urlDB1 = "https://twitter.com/frednora";
+            urlDB1 = "https://twitter.com/frednora";
 			
 			xLinkText2 = "@frednora | Twitter moments";
 			urlDB2 = "https://twitter.com/frednora/moments";
@@ -203,13 +224,13 @@
 			
 			xLinkText4 = "@frednora | Tweets & replies";
 			urlDB4 = "https://twitter.com/frednora/with_replies";
-        };                
+        }
 
        
 
         /*Google plus*/
-        if(resGoogle == document.myForm.username_input.value)
-		{ 
+        if (resGoogle == document.myForm.username_input.value)
+        { 
             xLinkText1 = "Google plus";
 			urlDB1 = "https://google.com/+frednora";
 			
@@ -219,16 +240,16 @@
 			xLinkText3 = "Google plus | Collections Fred Nora";
 			urlDB3 = "https://plus.google.com/collection/IZGbe";
 			
-			xLinkText4 = "Fred Nora zine";
-			urlDB4 = "https://frednorazine.blogspot.com.br/";
-        };        
-		
+			xLinkText4 = "gramado community";
+			urlDB4 = "https://gramadocommunity.blogspot.com/";
+        }
+
         /*Professional*/
-        if(resProfessional == document.myForm.username_input.value)
-		{ 
+        if (resProfessional == document.myForm.username_input.value)
+        { 
             xLinkText1 = "Linkedin Profile";
-			urlDB1 = "https://linkedin.com/in/fredericomartinsnora";
-			
+			urlDB1 = "https://linkedin.com/in/londrina";
+
 			xLinkText2 = "About me";
 			urlDB2 = "https://about.me/frednora";
 			
@@ -236,32 +257,32 @@
 			urlDB3 = "https://github.com/frednora";
 			
 			xLinkText4 = "We site";
-			urlDB4 = "https://frednora.github.io/";
-        }; 
+			urlDB4 = "https://noranotes.github.io/";
+        }
 
         /*Github #ux3 #ux4*/
-        if(resGithub == document.myForm.username_input.value)
-		{ 
+        if (resGithub == document.myForm.username_input.value)
+        { 
             xLinkText1 = "Github profile";
-			urlDB1 = "https://github.com/frednora";
-			
+            urlDB1 = "https://github.com/frednora";
+
             xLinkText2 = "Github Fred Nora's web site";
-			urlDB2 = "https://github.com/frednora/frednora.github.io";
-			
+            urlDB2 = "https://github.com/noranotes/noranotes.github.io";
+
             xLinkText3 = "Github Gramado source code";
-			urlDB3 = "https://github.com/frednora/gramado";
-			
+            urlDB3 = "https://github.com/frednora/gramado";
+
             xLinkText4 = "Github Kernel source code";
-			urlDB4 = "https://github.com/frednora/kernel";
-        };		
+            urlDB4 = "https://github.com/frednora/gramado";
+        }
 
         /* More ... */        
 
-		/*url completa*/
+        /*url completa*/
         xHref1 = urlDB1;
-		xHref2 = urlDB2;
-		xHref3 = urlDB3;
-		xHref4 = urlDB4;
+        xHref2 = urlDB2;
+        xHref3 = urlDB3;
+        xHref4 = urlDB4;
 
         /* Show formated link for xHref1*/
         document.getElementById("link1").innerHTML = xLinkText1;
@@ -313,8 +334,8 @@
         window.alert(txt); 
 	    return 0;
     }
-	
-	// Showing some message.
+
+    // Showing some message.
     function messageShow(){
         window.alert(message);
     }
@@ -354,46 +375,57 @@ function adminValidateBlogManagerForm()
 {
     var savePostNumber;
     var savePostTag;
-	var urlPosts = "https://frednora.github.io/blog/posts/";
-	
+    var urlPosts = "https://noranotes.github.io/blog/posts/";
+
 	/* Saving inputs */
-	savePostNumber = document.myForm.post_number_input.value;
-	savePostTag = document.myForm.post_tag_input.value; 
-	
-	if( adminLocked == 1 )
-	{
+    savePostNumber = document.myForm.post_number_input.value;
+    savePostTag    = document.myForm.post_tag_input.value; 
+
+
+    if ( adminLocked == true ){
         alert("adminValidateBlogManagerForm: This feature needs a password :(");		
-	    return 1;
-	}else{
+        return 1;
+    }else{
         /* ?? O que fazer aqui ???*/
         /*test*/		
-	    window.open(urlPosts + document.myForm.post_number_input.value + ".html");	
+
+        window.open( urlPosts + document.myForm.post_number_input.value + ".html" );
+
 		/*@todo: Continuar ...*/
-		return 0;
-	}
-	
+        return 0;
+    }
+
+
 	/*fail*/
 	return 0;
 }
 
 
-    //Variables.
-	var var11 = 0;	
-	var string1 = "This is a string.";
+    // Variables.
     
-    //Strings.
-    message = "Initializing ..."
-    
+var var11   = 0;
+var string1 = "This is a string.";
+
+// Strings.
+message = "Initializing ..."
 
 
-	
-/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+/* 
+ Toggle between adding and removing the "responsive" class 
+ to topnav when the user clicks on the icon 
+ */
+
 function myFunction()
 {
     var x = document.getElementById("myTopnav");
-    if(x.className === "navigation"){
+
+    if (x.className === "navigation"){
         x.className = "responsive";
     }else{
         x.className = "navigation";
     };
 }
+
+
+
+

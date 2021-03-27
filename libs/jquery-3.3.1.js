@@ -17,12 +17,14 @@
  *
  * Date: 2018-01-20T17:24Z
  */
- 
+
+
+
 ( function( global, factory ) {
 
-	"use strict";
+    "use strict";
 
-	if ( typeof module === "object" && typeof module.exports === "object" ) {
+    if ( typeof module === "object" && typeof module.exports === "object" ) {
 
 		// For CommonJS and CommonJS-like environments where a proper `window`
 		// is present, execute the factory and get jQuery.
@@ -31,46 +33,48 @@
 		// This accentuates the need for the creation of a real `window`.
 		// e.g. var jQuery = require("jquery")(window);
 		// See ticket #14549 for more info.
-		module.exports = global.document ?
-			factory( global, true ) :
-			function( w ) {
-				if ( !w.document ) {
-					throw new Error( "jQuery requires a window with a document" );
-				}
-				return factory( w );
-			};
-	} else {
-		factory( global );
-	}
+
+        module.exports = 
+            global.document          ?
+            factory( global, true )  :
+            function ( w ){
+                if ( !w.document ) {
+                    throw new Error( "jQuery requires a window with a document" );
+                }
+                return factory( w );
+            };
+
+    } else {
+        factory( global );
+    }
+
 
 // Pass this if window is not defined yet
 } )( typeof window !== "undefined" ? window : this, function( window, noGlobal ) {
 
 // Edge <= 12 - 13+, Firefox <=18 - 45+, IE 10 - 11, Safari 5.1 - 9+, iOS 6 - 9.1
 // throw exceptions when non-strict code (e.g., ASP.NET 4.5) accesses strict mode
-// arguments.callee.caller (trac-13335). But as of jQuery 3.0 (2016), strict mode should be common
+// arguments.callee.caller (trac-13335). But as of jQuery 3.0 (2016), 
+// strict mode should be common
 // enough that all such attempts are guarded in a try block.
+
 "use strict";
 
-var arr = [];
+var arr=[];
 
 var document = window.document;
 
 var getProto = Object.getPrototypeOf;
 
-var slice = arr.slice;
-
-var concat = arr.concat;
-
-var push = arr.push;
-
+var slice   = arr.slice;
+var concat  = arr.concat;
+var push    = arr.push;
 var indexOf = arr.indexOf;
 
 var class2type = {};
 
 var toString = class2type.toString;
-
-var hasOwn = class2type.hasOwnProperty;
+var hasOwn   = class2type.hasOwnProperty;
 
 var fnToString = hasOwn.toString;
 
@@ -78,84 +82,101 @@ var ObjectFunctionString = fnToString.call( Object );
 
 var support = {};
 
-var isFunction = function isFunction( obj ) {
+
+var isFunction = 
+function isFunction( obj ) {
 
       // Support: Chrome <=57, Firefox <=52
       // In some browsers, typeof returns "function" for HTML <object> elements
       // (i.e., `typeof document.createElement( "object" ) === "function"`).
       // We don't want to classify *any* DOM node as a function.
-      return typeof obj === "function" && typeof obj.nodeType !== "number";
-  };
+      
+    return typeof obj === "function" && typeof obj.nodeType !== "number";
+};
 
 
-var isWindow = function isWindow( obj ) {
-		return obj != null && obj === obj.window;
-	};
+var isWindow = 
+function isWindow( obj ) {
+    return obj != null && obj === obj.window;
+};
 
 
+var preservedScriptAttributes = {
+
+    type:     true,
+    src:      true,
+    noModule: true
+};
 
 
-	var preservedScriptAttributes = {
-		type: true,
-		src: true,
-		noModule: true
-	};
+function DOMEval( code, doc, node ) 
+{
+    doc = doc || document;
 
-	function DOMEval( code, doc, node ) {
-		doc = doc || document;
+    var i, script = doc.createElement( "script" );
 
-		var i,
-			script = doc.createElement( "script" );
+    script.text = code;
 
-		script.text = code;
-		if ( node ) {
-			for ( i in preservedScriptAttributes ) {
-				if ( node[ i ] ) {
-					script[ i ] = node[ i ];
-				}
-			}
-		}
-		doc.head.appendChild( script ).parentNode.removeChild( script );
-	}
+    if ( node ) 
+    {
+        for ( i in preservedScriptAttributes ) 
+        {
+            if ( node[ i ] ) 
+            {
+                script[ i ] = node[ i ];
+            }
+        }
+    }
+
+    doc.head.appendChild( script ).parentNode.removeChild( script );
+}
 
 
-function toType( obj ) {
-	if ( obj == null ) {
-		return obj + "";
-	}
+function toType( obj ) 
+{
+    if ( obj == null )
+    {
+        return obj + "";
+    }
 
 	// Support: Android <=2.3 only (functionish RegExp)
-	return typeof obj === "object" || typeof obj === "function" ?
-		class2type[ toString.call( obj ) ] || "object" :
-		typeof obj;
+
+    return typeof obj === "object" || typeof obj === "function"  ?
+        class2type[ toString.call( obj ) ] || "object"           :
+        typeof obj;
+
 }
+
 /* global Symbol */
 // Defining this global in .eslintrc.json would create a danger of using the global
 // unguarded in another place, it seems safer to define global only for this module
 
+var version = "3.3.1",
 
+    // Define a local copy of jQuery
 
-var
-	version = "3.3.1",
+jQuery = function( selector, context ) 
+{
 
-	// Define a local copy of jQuery
-	jQuery = function( selector, context ) {
+    // The jQuery object is actually just the init constructor 'enhanced'
+    // Need init if jQuery is called (just allow error to be thrown if not included)
 
-		// The jQuery object is actually just the init constructor 'enhanced'
-		// Need init if jQuery is called (just allow error to be thrown if not included)
-		return new jQuery.fn.init( selector, context );
-	},
+    return new jQuery.fn.init( selector, context );
+},
 
 	// Support: Android <=4.0 only
 	// Make sure we trim BOM and NBSP
-	rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+
+    rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+
 
 jQuery.fn = jQuery.prototype = {
 
 	// The current version of jQuery being used
-	jquery: version,
+ 
+    jquery: version,
 
-	constructor: jQuery,
+    constructor: jQuery,
 
 	// The default length of a jQuery object is 0
 	length: 0,
@@ -226,10 +247,13 @@ jQuery.fn = jQuery.prototype = {
 
 	// For internal use only.
 	// Behaves like an Array's method, not like a jQuery method.
-	push: push,
-	sort: arr.sort,
-	splice: arr.splice
+
+    push:   push,
+    sort:   arr.sort,
+    splice: arr.splice
 };
+
+
 
 jQuery.extend = jQuery.fn.extend = function() {
 	var options, name, src, copy, copyIsArray, clone,
@@ -299,6 +323,8 @@ jQuery.extend = jQuery.fn.extend = function() {
 	// Return the modified object
 	return target;
 };
+
+
 
 jQuery.extend( {
 
@@ -477,15 +503,18 @@ jQuery.extend( {
 	support: support
 } );
 
-if ( typeof Symbol === "function" ) {
-	jQuery.fn[ Symbol.iterator ] = arr[ Symbol.iterator ];
+
+if ( typeof Symbol === "function" ) 
+{
+    jQuery.fn[ Symbol.iterator ] = arr[ Symbol.iterator ];
 }
+
 
 // Populate the class2type map
 jQuery.each( "Boolean Number String Function Array Date RegExp Object Error Symbol".split( " " ),
-function( i, name ) {
-	class2type[ "[object " + name + "]" ] = name.toLowerCase();
-} );
+    function( i, name ) {
+        class2type[ "[object " + name + "]" ] = name.toLowerCase();
+    });
 
 function isArrayLike( obj ) {
 
@@ -496,14 +525,18 @@ function isArrayLike( obj ) {
 	var length = !!obj && "length" in obj && obj.length,
 		type = toType( obj );
 
-	if ( isFunction( obj ) || isWindow( obj ) ) {
-		return false;
-	}
+    if ( isFunction( obj ) || isWindow( obj ) ) 
+    {
+        return false;
+    }
 
-	return type === "array" || length === 0 ||
-		typeof length === "number" && length > 0 && ( length - 1 ) in obj;
+    return type   === "array" || 
+           length === 0 ||
+           typeof length === "number" && length > 0 && ( length - 1 ) in obj;
 }
-var Sizzle =
+
+
+
 /*!
  * Sizzle CSS Selector Engine v2.3.3
  * https://sizzlejs.com/
@@ -514,11 +547,12 @@ var Sizzle =
  *
  * Date: 2016-08-08
  */
-(function( window ) {
 
-var i,
-	support,
-	Expr,
+var Sizzle = (function( window ) {
+
+    var i,
+        support,
+        Expr,
 	getText,
 	isXML,
 	tokenize,
@@ -719,31 +753,46 @@ try {
 	};
 }
 
-function Sizzle( selector, context, results, seed ) {
-	var m, i, elem, nid, match, groups, newSelector,
-		newContext = context && context.ownerDocument,
 
-		// nodeType defaults to 9, since context defaults to document
-		nodeType = context ? context.nodeType : 9;
 
-	results = results || [];
+
+function Sizzle( selector, context, results, seed )
+{
+    // nodeType defaults to 9, since context defaults to document
+
+    var m, 
+        i, 
+        elem, 
+        nid, 
+        match, 
+        groups, 
+        newSelector, 
+        newContext = context && context.ownerDocument, 
+        nodeType   = context ? context.nodeType : 9;
+
+    results = results || [];
 
 	// Return early from calls with invalid selector or context
-	if ( typeof selector !== "string" || !selector ||
-		nodeType !== 1 && nodeType !== 9 && nodeType !== 11 ) {
 
-		return results;
-	}
+    if ( typeof selector !== "string" || 
+        !selector ||
+        nodeType !== 1 && nodeType !== 9 && nodeType !== 11 ) 
+    {
+        return results;
+    }
 
 	// Try to shortcut find operations (as opposed to filters) in HTML documents
 	if ( !seed ) {
 
-		if ( ( context ? context.ownerDocument || context : preferredDoc ) !== document ) {
-			setDocument( context );
-		}
-		context = context || document;
+        if ( ( context ? context.ownerDocument || context : preferredDoc ) !== document ) 
+        {
+            setDocument( context );
+        }
 
-		if ( documentIsHTML ) {
+        context = context || document;
+
+        if ( documentIsHTML ) 
+        {
 
 			// If the selector is sufficiently simple, try using a "get*By*" DOM method
 			// (excepting DocumentFragment context, where the methods don't exist)
@@ -849,8 +898,10 @@ function Sizzle( selector, context, results, seed ) {
 	}
 
 	// All others
-	return select( selector.replace( rtrim, "$1" ), context, results, seed );
+    
+    return select( selector.replace( rtrim, "$1" ), context, results, seed );
 }
+
 
 /**
  * Create key-value caches of limited size
@@ -858,35 +909,48 @@ function Sizzle( selector, context, results, seed ) {
  *	property name the (space-suffixed) string and (if the cache is larger than Expr.cacheLength)
  *	deleting the oldest entry
  */
-function createCache() {
-	var keys = [];
 
-	function cache( key, value ) {
-		// Use (key + " ") to avoid collision with native prototype properties (see Issue #157)
-		if ( keys.push( key + " " ) > Expr.cacheLength ) {
-			// Only keep the most recent entries
-			delete cache[ keys.shift() ];
-		}
-		return (cache[ key + " " ] = value);
-	}
-	return cache;
+function createCache()
+{
+    var keys = [];
+
+    function cache( key, value )
+    {
+        // Use (key + " ") to avoid collision with native prototype properties (see Issue #157)
+        // Only keep the most recent entries
+
+        if ( keys.push( key + " " ) > Expr.cacheLength )
+        {
+            delete cache[ keys.shift() ];
+        }
+        
+        return (cache[ key + " " ] = value);
+    }
+
+    return cache;
 }
+
 
 /**
  * Mark a function for special use by Sizzle
  * @param {Function} fn The function to mark
  */
-function markFunction( fn ) {
-	fn[ expando ] = true;
-	return fn;
+
+function markFunction( fn ) 
+{
+    fn[ expando ] = true;
+    return fn;
 }
+
 
 /**
  * Support testing using an element
  * @param {Function} fn Passed the created element and returns a boolean result
  */
-function assert( fn ) {
-	var el = document.createElement("fieldset");
+
+function assert( fn )
+{
+    var el = document.createElement("fieldset");
 
 	try {
 		return !!fn( el );
@@ -902,16 +966,19 @@ function assert( fn ) {
 	}
 }
 
+
 /**
  * Adds the same handler for all of the specified attrs
  * @param {String} attrs Pipe-separated list of attributes
  * @param {Function} handler The method that will be applied
  */
-function addHandle( attrs, handler ) {
-	var arr = attrs.split("|"),
-		i = arr.length;
 
-	while ( i-- ) {
+function addHandle( attrs, handler )
+{
+    var arr = attrs.split("|"),
+        i   = arr.length;
+
+	while ( i-- ){
 		Expr.attrHandle[ arr[i] ] = handler;
 	}
 }
@@ -955,12 +1022,15 @@ function createInputPseudo( type ) {
 	};
 }
 
+
 /**
  * Returns a function to use in pseudos for buttons
  * @param {String} type
  */
-function createButtonPseudo( type ) {
-	return function( elem ) {
+
+function createButtonPseudo( type )
+{
+    return function( elem ){
 		var name = elem.nodeName.toLowerCase();
 		return (name === "input" || name === "button") && elem.type === type;
 	};
@@ -1044,14 +1114,18 @@ function createPositionalPseudo( fn ) {
 	});
 }
 
+
 /**
  * Checks a node for validity as a Sizzle context
  * @param {Element|Object=} context
  * @returns {Element|Object|Boolean} The input node if acceptable, otherwise a falsy value
  */
-function testContext( context ) {
-	return context && typeof context.getElementsByTagName !== "undefined" && context;
+
+function testContext( context )
+{
+    return context && typeof context.getElementsByTagName !== "undefined" && context;
 }
+
 
 // Expose support vars for convenience
 support = Sizzle.support = {};
@@ -1548,38 +1622,49 @@ Sizzle.error = function( msg ) {
 	throw new Error( "Syntax error, unrecognized expression: " + msg );
 };
 
+
 /**
  * Document sorting and removing duplicates
  * @param {ArrayLike} results
  */
+
 Sizzle.uniqueSort = function( results ) {
-	var elem,
-		duplicates = [],
-		j = 0,
-		i = 0;
+
+    var elem,
+        duplicates = [],
+        j = 0,
+        i = 0;
 
 	// Unless we *know* we can detect duplicates, assume their presence
-	hasDuplicate = !support.detectDuplicates;
-	sortInput = !support.sortStable && results.slice( 0 );
-	results.sort( sortOrder );
 
-	if ( hasDuplicate ) {
-		while ( (elem = results[i++]) ) {
-			if ( elem === results[ i ] ) {
-				j = duplicates.push( i );
-			}
-		}
-		while ( j-- ) {
-			results.splice( duplicates[ j ], 1 );
-		}
-	}
+    hasDuplicate = !support.detectDuplicates;
+    sortInput    = !support.sortStable && results.slice( 0 );
+
+    results.sort( sortOrder );
+
+    if ( hasDuplicate ) 
+    {
+        while ( (elem = results[i++]) ) 
+        {
+            if ( elem === results[ i ] ) 
+            {
+                j = duplicates.push( i );
+            }
+        }
+
+        while ( j-- ) {
+            results.splice( duplicates[ j ], 1 );
+        }
+    }
 
 	// Clear input after sorting to release objects
 	// See https://github.com/jquery/sizzle/pull/225
-	sortInput = null;
 
-	return results;
+    sortInput = null;
+
+    return results;
 };
+
 
 /**
  * Utility function for retrieving the text value of an array of DOM nodes
@@ -1616,27 +1701,26 @@ getText = Sizzle.getText = function( elem ) {
 	return ret;
 };
 
+
 Expr = Sizzle.selectors = {
 
 	// Can be adjusted by the user
-	cacheLength: 50,
 
-	createPseudo: markFunction,
+    cacheLength:  50,
+    createPseudo: markFunction,
+    match:        matchExpr,
 
-	match: matchExpr,
+    attrHandle: {},
+    find:       {},
 
-	attrHandle: {},
-
-	find: {},
-
-	relative: {
-		">": { dir: "parentNode", first: true },
+    relative: {
+		">": { dir: "parentNode",      first: true },
 		" ": { dir: "parentNode" },
 		"+": { dir: "previousSibling", first: true },
 		"~": { dir: "previousSibling" }
-	},
+    },
 
-	preFilter: {
+    preFilter: {
 		"ATTR": function( match ) {
 			match[1] = match[1].replace( runescape, funescape );
 
@@ -2120,25 +2204,38 @@ Expr = Sizzle.selectors = {
 	}
 };
 
+
 Expr.pseudos["nth"] = Expr.pseudos["eq"];
 
+
 // Add button/input type pseudos
-for ( i in { radio: true, checkbox: true, file: true, password: true, image: true } ) {
-	Expr.pseudos[ i ] = createInputPseudo( i );
+
+for ( i in { radio: true, checkbox: true, file: true, password: true, image: true } ) 
+{
+    Expr.pseudos[ i ] = createInputPseudo( i );
 }
-for ( i in { submit: true, reset: true } ) {
-	Expr.pseudos[ i ] = createButtonPseudo( i );
+
+for ( i in { submit: true, reset: true } ) 
+{
+    Expr.pseudos[ i ] = createButtonPseudo( i );
 }
+
 
 // Easy API for creating new setFilters
 function setFilters() {}
 setFilters.prototype = Expr.filters = Expr.pseudos;
 Expr.setFilters = new setFilters();
 
-tokenize = Sizzle.tokenize = function( selector, parseOnly ) {
-	var matched, match, tokens, type,
-		soFar, groups, preFilters,
-		cached = tokenCache[ selector + " " ];
+tokenize = Sizzle.tokenize = function( selector, parseOnly ) 
+{
+    var matched, 
+        match, 
+        tokens, 
+        type,
+        soFar, 
+        groups, 
+        preFilters,
+        cached = tokenCache[ selector + " " ];
 
 	if ( cached ) {
 		return parseOnly ? 0 : cached.slice( 0 );
@@ -2148,7 +2245,8 @@ tokenize = Sizzle.tokenize = function( selector, parseOnly ) {
 	groups = [];
 	preFilters = Expr.preFilter;
 
-	while ( soFar ) {
+    while ( soFar ) 
+    {
 
 		// Comma and first run
 		if ( !matched || (match = rcomma.exec( soFar )) ) {
@@ -2189,33 +2287,41 @@ tokenize = Sizzle.tokenize = function( selector, parseOnly ) {
 		if ( !matched ) {
 			break;
 		}
-	}
+    }
 
 	// Return the length of the invalid excess
 	// if we're just parsing
 	// Otherwise, throw an error or return tokens
-	return parseOnly ?
-		soFar.length :
-		soFar ?
-			Sizzle.error( selector ) :
-			// Cache the tokens
-			tokenCache( selector, groups ).slice( 0 );
+
+    return parseOnly ?
+        soFar.length :
+            soFar                    ?
+            Sizzle.error( selector ) :
+            // Cache the tokens
+            tokenCache( selector, groups ).slice( 0 );
+
 };
 
-function toSelector( tokens ) {
-	var i = 0,
-		len = tokens.length,
-		selector = "";
-	for ( ; i < len; i++ ) {
-		selector += tokens[i].value;
-	}
-	return selector;
+
+function toSelector( tokens ){
+
+    var i=0,
+        len = tokens.length,
+        selector = "";
+
+    for ( ; i < len; i++ ) 
+    {
+        selector += tokens[i].value;
+    }
+
+    return selector;
 }
 
 function addCombinator( matcher, combinator, base ) {
-	var dir = combinator.dir,
+
+	var dir  = combinator.dir,
 		skip = combinator.next,
-		key = skip || dir,
+		key  = skip || dir,
 		checkNonElements = base && key === "parentNode",
 		doneName = done++;
 
@@ -2276,8 +2382,10 @@ function addCombinator( matcher, combinator, base ) {
 		};
 }
 
+
 function elementMatcher( matchers ) {
-	return matchers.length > 1 ?
+
+    return matchers.length > 1 ?
 		function( elem, context, xml ) {
 			var i = matchers.length;
 			while ( i-- ) {
@@ -2290,12 +2398,16 @@ function elementMatcher( matchers ) {
 		matchers[0];
 }
 
-function multipleContexts( selector, contexts, results ) {
-	var i = 0,
-		len = contexts.length;
-	for ( ; i < len; i++ ) {
-		Sizzle( selector, contexts[i], results );
-	}
+
+function multipleContexts( selector, contexts, results )
+{
+    var i = 0,
+        len = contexts.length;
+
+    for ( ; i < len; i++ ) {
+        Sizzle( selector, contexts[i], results );
+    }
+
 	return results;
 }
 
@@ -2577,9 +2689,10 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 			return unmatched;
 		};
 
-	return bySet ?
-		markFunction( superMatcher ) :
-		superMatcher;
+    return bySet                      ?
+        markFunction( superMatcher )  :
+        superMatcher;
+
 }
 
 compile = Sizzle.compile = function( selector, match /* Internal Use Only */ ) {
@@ -2621,8 +2734,10 @@ compile = Sizzle.compile = function( selector, match /* Internal Use Only */ ) {
  * @param {Array} [results]
  * @param {Array} [seed] A set of elements to match against
  */
-select = Sizzle.select = function( selector, context, results, seed ) {
-	var i, tokens, token, type, find,
+
+select = Sizzle.select = function( selector, context, results, seed ) 
+{
+    var i, tokens, token, type, find,
 		compiled = typeof selector === "function" && selector,
 		match = !seed && tokenize( (selector = compiled.selector || selector) );
 
@@ -2710,9 +2825,11 @@ support.sortDetached = assert(function( el ) {
 	return el.compareDocumentPosition( document.createElement("fieldset") ) & 1;
 });
 
+
 // Support: IE<8
 // Prevent attribute/property "interpolation"
 // https://msdn.microsoft.com/en-us/library/ms536429%28VS.85%29.aspx
+
 if ( !assert(function( el ) {
 	el.innerHTML = "<a href='#'></a>";
 	return el.firstChild.getAttribute("href") === "#" ;
@@ -2763,15 +2880,14 @@ return Sizzle;
 jQuery.find = Sizzle;
 jQuery.expr = Sizzle.selectors;
 
+
 // Deprecated
 jQuery.expr[ ":" ] = jQuery.expr.pseudos;
-jQuery.uniqueSort = jQuery.unique = Sizzle.uniqueSort;
-jQuery.text = Sizzle.getText;
-jQuery.isXMLDoc = Sizzle.isXML;
-jQuery.contains = Sizzle.contains;
+jQuery.uniqueSort  = jQuery.unique = Sizzle.uniqueSort;
+jQuery.text           = Sizzle.getText;
+jQuery.isXMLDoc       = Sizzle.isXML;
+jQuery.contains       = Sizzle.contains;
 jQuery.escapeSelector = Sizzle.escape;
-
-
 
 
 var dir = function( elem, dir, until ) {
@@ -2790,16 +2906,19 @@ var dir = function( elem, dir, until ) {
 };
 
 
-var siblings = function( n, elem ) {
-	var matched = [];
+var siblings = function( n, elem )
+{
+    var matched = [];
 
-	for ( ; n; n = n.nextSibling ) {
-		if ( n.nodeType === 1 && n !== elem ) {
-			matched.push( n );
-		}
-	}
+    for ( ; n; n = n.nextSibling ) 
+    {
+        if ( n.nodeType === 1 && n !== elem ) 
+        {
+            matched.push( n );
+        }
+    }
 
-	return matched;
+    return matched;
 };
 
 
@@ -2807,17 +2926,18 @@ var rneedsContext = jQuery.expr.match.needsContext;
 
 
 
-function nodeName( elem, name ) {
-
-  return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
-
+function nodeName( elem, name ) 
+{
+    return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
 };
+
 var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
 
 
 
 // Implement the identical functionality for filter and not
-function winnow( elements, qualifier, not ) {
+function winnow( elements, qualifier, not ) 
+{
 	if ( isFunction( qualifier ) ) {
 		return jQuery.grep( elements, function( elem, i ) {
 			return !!qualifier.call( elem, i, elem ) !== not;
@@ -3017,8 +3137,11 @@ var rootjQuery,
 // Give the init function the jQuery prototype for later instantiation
 init.prototype = jQuery.fn;
 
+
+
 // Initialize central reference
 rootjQuery = jQuery( document );
+
 
 
 var rparentsprev = /^(?:parents|prev(?:Until|All))/,
@@ -3199,13 +3322,19 @@ var rnothtmlwhite = ( /[^\x20\t\r\n\f]+/g );
 
 
 // Convert String-formatted options into Object-formatted ones
-function createOptions( options ) {
-	var object = {};
-	jQuery.each( options.match( rnothtmlwhite ) || [], function( _, flag ) {
-		object[ flag ] = true;
-	} );
+
+function createOptions( options ) 
+{
+    var object = {};
+
+    jQuery.each( options.match( rnothtmlwhite ) || [], function( _, flag ) 
+    {
+        object[ flag ] = true;
+    } );
+
 	return object;
 }
+
 
 /*
  * Create a callback list using the following parameters:
@@ -3229,6 +3358,7 @@ function createOptions( options ) {
  *	stopOnFalse:	interrupt callings when a callback returns false
  *
  */
+
 jQuery.Callbacks = function( options ) {
 
 	// Convert options from String-formatted to Object-formatted if needed
@@ -3829,8 +3959,10 @@ jQuery.Deferred.exceptionHook = function( error, stack ) {
 
 
 
-jQuery.readyException = function( error ) {
-	window.setTimeout( function() {
+jQuery.readyException = function( error ) 
+{
+	window.setTimeout( function() 
+	{
 		throw error;
 	} );
 };
