@@ -1,76 +1,78 @@
 /* 
     File: gramado.css 
-	
-	Client side CSS library.
-    
-	Gramado Personas 2018.
-	----------------------
-	
-	Biblioteca para contrução de páginas web.
-    Isso é um protótipo. 
-	Essa é uma versão piloto. 
-	Com comentários detalhados.
-	Ordem: 
-	text stuff first of all   
-	font>text>...
-	padding>border>margin
-	
-	Segue um modelo de organização da biblioteca por tipo de elemento:
-    =================================================================
-   
-    Obs: Essa organização é inspirada na organização de outra biblioteca open source
-disponível na web.
-    Obs: Ordem: Reset/Elements/Typography/Globals/@media MAX/@media MIN.
-	
-1.0:
-    Reset. ?? 
-	(Inicializações).
-	
-2.0:
-    Elements. 
-	Elementos básicos. 
-	Os elementos básicos de html como 
-	del, figure, img, th, td, (th, td) ,caption, table dd, dt,dl li, ul, ol, hr.
 
-3.0:
-    Typography.
-	Big, small (font size ??) 
-	sup, sub, 
-	mark, ins, pre, samp, var, tt, kbd, code, address, blockquote support, 
-	h1, h2, h3, h4, h5, h6 ... 
-	p, b, 
-	strong, dfn, cite, em, i, body,
+Order:
+
+1) html structures.
+    html, head, body
+
+2) Setup basic html elements.
+    del, figure, img, th, td, (th, td) ,caption, table dd, dt,dl li, ul, ol, hr.
+
+3) Typography.
+    Big, small (font size ??) 
+    sup, sub, 
+    mark, ins, pre, samp, var, tt, kbd, code, address, blockquote support, 
+    h1, h2, h3, h4, h5, h6 ... 
+    p, b, 
+    strong, dfn, cite, em, i, body,
     button, input, select, textarea,
-		
-	
-4.0: 
-    Classes globais.
-	ux4-thinking, ux3-logic, ux2-creativity ,ux1-action
- 
-5.0:
-   @media MIN
-   
-   
-    @todo:
-        Simplificar as funcionalidades. 
-   
+
+4) Global classes.
+    Classes created by Fred Nora.
+
+5) @media min.
+    Ajusting screen stuff.
+
     History:
         2017 - Created by Fred Nora.  
 */
  
+
  
 /* Obs: Talvez isso não seja necessário. */ 
 <style type="text/css">
 
 
-/* +1 Reset */
+/* 
+ * =======================================================
+ * +1 Elements */
+
+/* naturalmente pequena no html */
+/*font-family: sans-serif;*/
+html {
+   font-size: 11px;
+   font-family: "Minion", fantasy, Optima; 
+   padding:0;
+   border:0;
+   margin:0;
+} 
+
+head { 
+    /* Nothing */ 
+}
+
+/* naturalmente média o|o no body  (A) */
+/* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
+body {
+    font-size: 15px;
+    font-family: "Decorative", Schola, American ; 
+    margin: 0;
+    color: #FFF;
+}
+
+
+/* 
+ * =======================================================
+ * +2 Basic html components*/
+
 
     button {
-        cursor: pointer;		
+        cursor: pointer;
     }
 
    caption {
-		
+
         padding-top: 8px;
         padding-bottom: 8px;
         text-align: left;
@@ -107,7 +109,7 @@ disponível na web.
     }
 
     img {
-	    border: 0;
+        border: 0;
     }
 
     th {
@@ -130,21 +132,21 @@ disponível na web.
 
     dd {
         margin-left: 0;
-    }	
-	
+    }
+
     figure {
         margin: 0;
     }
-	
+
     hr {
         margin-top: 22px;
         margin-bottom: 22px;
         border: 0;
         border-top: 1px solid #ddd;
         height: 0;
-      }	
+      }
 
-	
+
     label {
         font-weight: bold;
         margin-bottom: 8px;
@@ -161,9 +163,9 @@ disponível na web.
 
     input {
         margin: 0;
-        font-size: 15px;    
-        padding-top: 8px;		
-        color: #555;		
+        font-size: 15px; 
+        padding-top: 8px;
+        color: #555;
     }
 
     output {
@@ -171,12 +173,12 @@ disponível na web.
         display: block;
         padding-top: 8px;
         color: #555;
-    }		
-	 	 
-    table {
-        background-color: transparent;		
     }
-	
+ 
+    table {
+        background-color: transparent;
+    }
+
     article,
     figure,
     footer,
@@ -185,39 +187,14 @@ disponível na web.
     }
 
 
-
-	
  
- 
-/* +2 Elements */
 
-    html {
-		
-	    /* naturalmente pequena no html */
-        
-		font-size: 11px;
-		font-family: "Minion", fantasy, Optima; /*font-family: sans-serif;*/
-        padding:0;
-		border:0;
-        margin:0;
-    } 
 
-    head { /* Nothing */ }
- 
-	body {
-	    
-		/* naturalmente média o|o no body  (A) */
-		font-size: 15px;
-        font-family: "Decorative", Schola, American ; /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
-        margin: 0;	       
-		position: absolute;
-        color: #FFF;
-    }	
-	 
-
+/* 
+ * =======================================================
+ * +3 Typography */
 
 /*
- +3 
  Typography.
         Web Typography: 
 		The techniques and strategies used to style and arrange text on a web page. 
@@ -225,7 +202,7 @@ disponível na web.
  */
 	
 	strong {
-	    font-weight: bold; 	
+	    font-weight: bold;
 	}
 	
 	
@@ -234,10 +211,10 @@ disponível na web.
 		font-size: 15px; /*A*/
 		
 	    /* color */
-        color: #3377aa;*/
-        background-color: transparent;				
-		
-	    /* text */		
+        color: #3377aa;
+        background-color: transparent;
+
+	    /* text */
         text-decoration: none;		
         text-decoration-color: currentcolor;
         text-decoration-line: none;
@@ -246,7 +223,7 @@ disponível na web.
 	
 
     a:active {
-        outline: 1;		
+        outline: 1;
 	}
     
 	a:focus {
@@ -255,7 +232,7 @@ disponível na web.
     }
 	
     a:hover {
-        color: #225588;		
+        color: #225588;
         text-decoration: underline;
         outline: 0;		
 	}
@@ -283,11 +260,11 @@ disponível na web.
 		
 	em {
         font-size: 18px;
-        font-weight: bold; 		
+        font-weight: bold; 
 	}
 	
 	font {
-	    /*font-weight: bold; */ 		
+	    /*font-weight: bold; */ 
 	}	
 	
 
@@ -320,7 +297,7 @@ disponível na web.
 	input {
         font-size: 15px;
 		font-family: "Lucida Grande";
-        line-height: normal;		
+        line-height: normal;
     }
 	
 	
@@ -365,68 +342,69 @@ disponível na web.
  
      
 
-/*
- +4
-    Classes globais.
-	Project Gramado Personas.
+/* 
+ * =======================================================
+ * +4 Global classes */
 
+.bg-primary {
+    color: #fff;
+    background-color: #337ab7;
+}
 
-   /* global class*/
+.bg-secondary {
+    color: #fff;
+    background-color: #337bb8;
+}
 
-    .bg-primary {
-        color: #fff;
-        background-color: #337ab7;
-    }
-
-    .bg-secondary {
-        color: #fff;
-        background-color: #337bb8;
-    }
-
-
-  .button {
-	  
-        font-size: 15px;
-        font-weight: normal;
-        text-align: center;
-        display: inline-block;
-        padding: 11px 11px;
-        margin-bottom: 0;	  
-        vertical-align: middle;
+.button {
+    font-size: 15px;
+    font-weight: normal;
+    text-align: center;
+    display: inline-block;
+    padding: 11px 11px;
+    margin-bottom: 0;
+    vertical-align: middle;
         cursor: pointer;
         background-image: none;
         border: 1px solid transparent;
         border-radius: 4px;
-	  
-    }
+}
+.button-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.button-secondary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2F6da8;
+}
 
-    .button-primary {
-        color: #fff;
-        background-color: #337ab7;
-        border-color: #2e6da4;
-    }
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
 
-    .button-secondary {
-        color: #fff;
-        background-color: #337ab7;
-        border-color: #2F6da8;
-    }
+.iframe-container {
+  overflow: hidden;
+  padding-top: 56.25%;
+  position: relative;
+}
+ 
+.iframe-container iframe {
+   border: 0;
+   height: 100%;
+   left: 0;
+   position: absolute;
+   top: 0;
+   width: 100%;
+}
 
 
-    .container {
-		
-        padding-right: 15px;
-        padding-left: 15px;
-		
-        margin-right: auto;
-        margin-left: auto;
-		
-    }
-
-
-    .container-wide {
-		
-        padding-right: 11px;
+.container-wide {
+    padding-right: 11px;
         padding-left: 11px;
         margin-right: auto;
         margin-left: auto;
@@ -452,29 +430,27 @@ disponível na web.
 
         box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
     }
-	
 
+.input {
+    display: table;
+}
 
-    .input {
-        display: table;
-     }
+.output {
+    display: table;
+}
 
-   .output {
-        display: table;
-     }
+/* \o/ */
+.input-small {
+    font-size: 8px;
+    height: 22px;
+    padding: 8px 9px;
+    line-height: 1.2;
+    border-radius: 3px;
+}
 
-    /* \o/ */
-    .input-small {
-        font-size: 8px;
-        height: 22px;
-        padding: 8px 9px;
-        line-height: 1.2;
-        border-radius: 3px;
-    }
-
-    .input-medium {
-        font-size: 15px;
-        height: 33px;
+.input-medium {
+    font-size: 15px;
+    height: 33px;
         padding: 10px 11px;
         line-height: 1.3333333;
         border-radius: 4px;
@@ -492,9 +468,8 @@ disponível na web.
     .label {
        font-size: 88%;
        font-weight: bold;
-	   text-align: center;
+       text-align: center;
        display: inline;
-
        line-height: 1;
        color: #fff;
     }
@@ -515,7 +490,7 @@ disponível na web.
     }
 	
     .navbar-brand {
-        font-size: 18px;		
+        font-size: 18px;
         float: left;
         height: 55px;
         padding: 15px 15px;
@@ -551,14 +526,14 @@ disponível na web.
  		
     /*Módulos onde os posts serão apresentados em /blog/index.html */
     .posts {
-	    
-		font-size: 15px;
+
+        font-size: 15px;
         font-family:'Arial';
         margin-left:auto;
         margin-right:auto;
-        border: 1px solid #d8d8d8;	 
-		background: White;
-        position: relative;		
+        border: 1px solid #d8d8d8;
+        background: White;
+        position: relative;
         width: 88%;
         height: 44%;
     }
@@ -567,7 +542,7 @@ disponível na web.
     .progress-bar {
 		
         font-size: 11px;
-		text-align: center;
+        text-align: center;
         float: left;
         width: 0;
         height: 100%;
@@ -576,64 +551,46 @@ disponível na web.
         background-color: #337777;
     }
 
-    
-  
-    .table {
-        width: 100%;
-        max-width: 100%;
-		
-        margin-bottom: 15px;
-    }
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 15px;
+}
+
+.thumbnail {
+    display: block;
+    padding: 8px;
+    margin-bottom: 22px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.radio,
+.checkbox {
+    position: relative;
+    display: block;
+    margin-top:    11px;
+    margin-bottom: 11px;
+}
+
+.widget {
+    text-align: left; 
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.hidden {
+    display: none !important;
+}
 
 
-    .thumbnail {
-		
-        display: block;
-        padding: 8px;
-        margin-bottom: 22px;
-         background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-     }
+/* 
+ * =======================================================
+ * +5 @media min */
 
-
-
-    .radio,
-    .checkbox {
-        position: relative;
-        display: block;
-        margin-top: 11px;
-        margin-bottom: 11px;
-    }
-
- 
-    .widget {
-        text-align: left; 
-    }
-
- 
-	
-     .invisible {
-       visibility: hidden;
-    }
-	
-
-	
-    .hidden {
-        display: none !important;
-    }
-
-    
-    }
-  
-     
-    
-   
-
-/*
- +5
- ************************************ @media MIN *******************************     
- */
 
 /* 
 Alguns elementos gráficos ficam evidenciados à medidada que a tela aumenta.
@@ -645,7 +602,6 @@ algumas fontes tem que aumentar.
     .container {
         width: 300px;
     }
- 
     .container-wide {
         width: 320px;
     }
@@ -705,8 +661,7 @@ algumas fontes tem que aumentar.
  >> MIN 1023px
  Responsive for large width, hide menu itens. */
 @media screen and (min-width: 1024px) {
-	
- 
+
     .container {
         width: 1004px;
     }
@@ -720,9 +675,7 @@ algumas fontes tem que aumentar.
  
 
 @media screen and (min-width: 1280px) {
-	
-	 
-	
+
     .container {
         width: 1260px;
     }
@@ -730,12 +683,11 @@ algumas fontes tem que aumentar.
     .container-wide {
         width: 1280px;
     }
-	
+
 } 
 
 @media screen and (min-width: 1366px) { 
 
-  
 
     .container {
         width: 1346px;
@@ -761,9 +713,6 @@ algumas fontes tem que aumentar.
 
  
 @media screen and (min-width: 2048px) {
-	
- 
-   
 
     .container {
         width: 2028px;
@@ -779,7 +728,7 @@ algumas fontes tem que aumentar.
 /* 4k */
 @media screen and (min-width: 3840px) { 
  
-  
+
     .container {
         width: 3800px;
     }
@@ -787,12 +736,9 @@ algumas fontes tem que aumentar.
     .container-wide {
         width: 3840px;
     }
-	
- 
 
 } 
 
 
-
-
 </style>
+
